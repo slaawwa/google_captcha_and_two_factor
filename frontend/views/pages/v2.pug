@@ -1,0 +1,31 @@
+extends ../layout
+
+block head
+    title Google captcha V2
+
+block append _endHead
+    if !user
+        script.
+            var onloadCallback = function() {
+                grecaptcha.render('html_element', {
+                    'sitekey' : '#{pubKey}',
+                });
+            };
+
+block content
+
+
+    if user
+        h2 User: #{user}
+    else
+        .row
+            .col-md-offset-4.col-md-4
+                form(method='post')
+                    .form-group
+                        label Username
+                        input.form-control(value='' name='user' placeholder="Username" required)
+                    .form-group
+                        div#html_element
+                    .form-group
+                        button.btn.btn-default Send
+        script(src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer)

@@ -1,0 +1,45 @@
+include _mixin
+doctype html
+html(lang='ua')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(name="viewport" content="initial-scale=1, maximum-scale=1")
+        block _head
+            //- link(rel='icon', type='image/jpeg', href='/admin/static/img/favicon.png')
+            block head
+                if title
+                    title= title + ' | Captcha + Two factor'
+                else
+                    title Karma
+
+            block _endHead
+                +style(
+                        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+                        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css',
+                        '/static/style.css'
+                    )
+                block styles
+
+    body
+
+        block header
+            include partials/header
+
+            main.container
+                block content
+                    | !{content}
+
+                block footer
+                    include partials/foot
+
+        block _endBody
+
+            +script(
+                    '//code.jquery.com/jquery-2.2.4.min.js',
+                    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+                    '/static/main.js'
+                )
+
+            block scripts

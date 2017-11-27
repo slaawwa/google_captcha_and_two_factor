@@ -1,0 +1,53 @@
+extends ../layout
+
+block head
+    title Two Factor
+
+block styles
+    style.
+        #qrcode svg {
+            max-width: 300px;
+        }
+
+block content
+    h1 Two Factor
+
+    if user
+        h2 Two Auth user: #{user}
+    else
+        h3
+            a(
+                    href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ru"
+                    target="_blank"
+                ) Google android app
+        .row
+            if qrcode
+                .col-md-6
+                    //- img(src=qrcode)
+                    #qrcode!= qrcode
+            .col-md-6
+                form(method='post')
+                    .form-group
+                        label Username
+                        input.form-control(
+                                value=''
+                                name='user'
+                                placeholder="Username"
+                                required
+                            )
+                    .form-group
+                        label Code
+                        input.form-control(
+                                name='userToken'
+                                placeholder="Code"
+                                required
+                                value=''
+                            )
+                    .form-group
+                        button.btn.btn-default(
+                                name='base32secret'
+                                value=secret.base32
+                            ) Submit
+                hr
+                h4 Secret code
+                pre!= secret.base32

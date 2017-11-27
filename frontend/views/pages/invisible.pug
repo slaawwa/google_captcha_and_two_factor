@@ -1,0 +1,33 @@
+extends ../layout
+
+block head
+    title Google captcha V2
+
+block scripts
+    if !user
+        script.
+            function onSubmit() {
+                console.log('Submit')
+                $('form').submit();
+            }
+        +script('https://www.google.com/recaptcha/api.js')
+
+block content
+    h1 Invisible
+
+    if user
+        h2 User: #{user}
+    else
+        .row
+            .col-md-offset-4.col-md-4
+                form(method='post')
+                    .form-group
+                        label Username
+                        input.form-control(value='' name='user' placeholder="Username" required)
+                    .form-group
+                        button.g-recaptcha.btn.btn-default(
+                                data-callback="onSubmit"
+                                data-size="invisible"
+                                data-sitekey=pubKey
+                            ) Submit
+

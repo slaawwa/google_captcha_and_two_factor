@@ -1,0 +1,10 @@
+{
+    "v2": {
+        "public": "<public_key>",
+        "secret": "<secret_key>"
+    },
+    "invisible": {
+        "public": "<public_key>",
+        "secret": "<secret_key>"
+    }
+}
